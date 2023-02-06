@@ -13,8 +13,7 @@ variable "environment" {
 variable "location" {
   type        = string
   description = "Location of the resources"
-  #default     = "South Central US"
-  default     = "East US" 
+  default     = "East US"
 }
 
 variable "ARM_SUBSCRIPTION_ID" {
