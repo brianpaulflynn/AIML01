@@ -10,6 +10,7 @@ Then add TF_VAR_Environment variables for setting the variables used in the _pro
 <li>TF_VAR_ARM_CLIENT_ID
 <li>TF_VAR_ARM_CLIENT_SECRET
 </ul>
+
 ## Must accept product terms
 must run from linux prompt: az vm image terms accept --urn microsoft-ads:linux-data-science-vm-ubuntu:linuxdsvmubuntu:latest
 
