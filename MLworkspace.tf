@@ -1,3 +1,4 @@
+# ref: https://github.com/Azure/terraform/tree/master/quickstart/101-machine-learning
 resource "azurerm_resource_group" "default" {
   name     = "rg-${var.name}-${var.environment}"
   location = var.location
