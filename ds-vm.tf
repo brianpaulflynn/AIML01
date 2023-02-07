@@ -1,11 +1,18 @@
 # must run from cmd prompt: az vm image terms accept --urn microsoft-ads:linux-data-science-vm-ubuntu:linuxdsvmubuntu:latest
+# ref: https://github.com/anoff/tf-azure-datascience
+
 variable "vm-name" {
   default = "user1"
 }
 
-resource "azurerm_resource_group" "ds" {
+resource "azurerm_resource_group" "default" {
   name     = "rg-${var.name}-${var.environment}"
   location = var.location
+}
+
+resource "azurerm_resource_group" "ds" {
+  name     = "rcs-datascience"
+  location = "${var.location}"
 }
 
 resource "azurerm_virtual_network" "ds" {

@@ -1,3 +1,4 @@
+# ref: https://github.com/Azure/terraform/tree/master/quickstart/101-machine-learning
 # Generate random string for unique compute instance name
 resource "random_string" "ci_prefix" {
   length  = 8
