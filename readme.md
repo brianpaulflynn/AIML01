@@ -14,8 +14,6 @@ Then add TF_VAR_Environment variables for setting the variables used in the _pro
 ## Must accept product terms
 must run from linux prompt: az vm image terms accept --urn microsoft-ads:linux-data-science-vm-ubuntu:linuxdsvmubuntu:latest
 
-![screenshot](aiml01work.png)
-
 ## Fix for auth issues durring provisioning
 Error: reading queue properties for AzureRM Storage Account 
 queues.Client#GetServiceProperties: Failure responding to request: 
@@ -30,3 +28,6 @@ Consider always running it before apply.<br/>
 EX: sudo hwclock -s;terraform apply;
 
 -- https://stackoverflow.com/questions/60485712/terraform-and-azure-unable-to-provision-storage-account
+
+![screenshot](aiml01work.png)
+
