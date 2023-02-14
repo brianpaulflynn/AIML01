@@ -16,3 +16,17 @@ must run from linux prompt: az vm image terms accept --urn microsoft-ads:linux-d
 
 ![screenshot](aiml01work.png)
 
+## Fix for auth issues durring provisioning
+Error: reading queue properties for AzureRM Storage Account 
+queues.Client#GetServiceProperties: Failure responding to request: 
+StatusCode=403 -- Original Error: autorest/azure: Service returned an error. 
+Status=403 Code="AuthenticationFailed" Message="Server failed to authenticate the request.
+ Make sure the value of Authorization header is formed correctly including the signature.
+
+Fix by running this command to adjust the clock: sudo hwclock -s
+
+Consider always running it before apply.<br/>
+<br/>
+EX: sudo hwclock -s;terraform apply;
+
+-- https://stackoverflow.com/questions/60485712/terraform-and-azure-unable-to-provision-storage-account
