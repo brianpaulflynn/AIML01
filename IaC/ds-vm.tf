@@ -65,9 +65,8 @@ data "azurerm_public_ip" "ds-pip" {
   name = "ds-pip"
   resource_group_name = azurerm_resource_group.ds.name
 }
-output "public_ip_address" {
-  #value = "${data.azurerm_public_ip.ds-pip.*.ip_address}"
-  value = data.azurerm_public_ip.ds-pip.ip_address
+output "ssh_tunnel_cmd" {
+  value = "ssh -L 0.0.0.0:8888:localhost:8888 ${var.admin_username}@${data.azurerm_public_ip.ds-pip.ip_address}"
 }
 
 resource "azurerm_network_interface" "ds" {
@@ -81,6 +80,16 @@ resource "azurerm_network_interface" "ds" {
     private_ip_address_allocation = "dynamic"
     public_ip_address_id = azurerm_public_ip.ds-pip.id
   }
+}
+
+resource "random_string" "vm_password" {
+  length  = 16
+  upper   = true
+  special = true
+  numeric  = true # **NOTE**: number is deprecated, use `numeric` instead.
+}
+output "vm_password" {
+  value = random_string.vm_password.result
 }
 
 resource "azurerm_virtual_machine" "ds" {
@@ -124,7 +133,7 @@ resource "azurerm_virtual_machine" "ds" {
   os_profile {
     computer_name  = "hostname"
     admin_username = "${var.admin_username}" #"dsadmin"
-    admin_password = "${var.admin_password}" #"Password1234!"
+    admin_password = random_string.vm_password.result # "${var.admin_password}" #"Password1234!"
   }
 
   os_profile_linux_config {
@@ -137,18 +146,19 @@ resource "azurerm_virtual_machine" "ds" {
 }
 
 
-resource "null_resource" "copy-test-file" {
+resource "null_resource" "copy-config-file" {
 
   connection {
     type     = "ssh"
     host     = "${azurerm_public_ip.ds-pip.ip_address}"
     user     = "${var.admin_username}"
-    password = "${var.admin_password}"
-  }t
+    password = "${random_string.vm_password.result}" # "${var.admin_password}"
+  }
 
   provisioner "file" {
     source      = "../scripts/config-vm.sh"
     destination = "config-vm.sh"
   }
 
+  depends_on = [ azurerm_public_ip.ds-pip, random_string.vm_password ]
 }
