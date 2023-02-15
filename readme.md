@@ -29,5 +29,10 @@ EX: sudo hwclock -s;terraform apply;
 
 -- https://stackoverflow.com/questions/60485712/terraform-and-azure-unable-to-provision-storage-account
 
+## How To Connect
+Can use Putty or an SSH call: ssh -L 0.0.0.0:8888:localhost:8888 dsadmin@PUBLIC_IP_ADDRESS_FROM_OUTPUT
+Run the config-vm.sh script.  You may need to grant permssiosn with chmos +x config-vm.sh
+Then use a browser to connect to the URL it outputs with a unique token
+
 ![screenshot](aiml01work.png)
 
