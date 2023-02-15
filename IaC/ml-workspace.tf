@@ -20,6 +20,14 @@ resource "azurerm_key_vault" "default" {
   purge_protection_enabled = false
 }
 
+resource "azurerm_container_registry" "default" {
+  name                = "cr${var.name}${var.environment}"
+  location            = azurerm_resource_group.default.location
+  resource_group_name = azurerm_resource_group.default.name
+  sku                 = "Premium"
+  admin_enabled       = true
+}
+
 resource "azurerm_storage_account" "default" {
   name                            = "st${var.name}${var.environment}"
   location                        = azurerm_resource_group.default.location
@@ -27,14 +35,8 @@ resource "azurerm_storage_account" "default" {
   account_tier                    = "Standard"
   account_replication_type        = "GRS"
   #allow_nested_items_to_be_public = false
-}
-
-resource "azurerm_container_registry" "default" {
-  name                = "cr${var.name}${var.environment}"
-  location            = azurerm_resource_group.default.location
-  resource_group_name = azurerm_resource_group.default.name
-  sku                 = "Premium"
-  admin_enabled       = true
+  #shared_access_key_enabled = true  #??
+  #public_network_access_enabled = true # Error: Unsupported argument
 }
 
 # Machine Learning workspace
