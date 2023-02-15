@@ -1,6 +1,9 @@
+## Must accept product terms
+must run from linux prompt: az vm image terms accept --urn microsoft-ads:linux-data-science-vm-ubuntu:linuxdsvmubuntu:latest
+
 ## Must create SPA
 must run from powershell or linux?:
-az ad sp create-for-rbac --name terraform_spa --role Contributor --scopes /subscriptions/xxxxxxxxxxxxx
+az ad sp create-for-rbac --name terraform_spa --role Contributor --scopes /subscriptions/xxxxxx--your-sub--xxxxxxx
 
 Then add TF_VAR_Environment variables for setting the variables used in the _providers.tf file.
 
@@ -11,8 +14,10 @@ Then add TF_VAR_Environment variables for setting the variables used in the _pro
 <li>TF_VAR_ARM_CLIENT_SECRET
 </ul>
 
-## Must accept product terms
-must run from linux prompt: az vm image terms accept --urn microsoft-ads:linux-data-science-vm-ubuntu:linuxdsvmubuntu:latest
+## Build with Terraform
+The IaC directory contains all the terraform.<br/>
+<br/>
+So.... $ terraform init; terraform apply;
 
 ## Fix for auth issues durring provisioning
 Error: reading queue properties for AzureRM Storage Account 
@@ -29,9 +34,13 @@ EX: sudo hwclock -s;terraform apply;
 
 -- https://stackoverflow.com/questions/60485712/terraform-and-azure-unable-to-provision-storage-account
 
-## How To Connect
-Can use Putty or an SSH call: ssh -L 0.0.0.0:8888:localhost:8888 dsadmin@PUBLIC_IP_ADDRESS_FROM_OUTPUT
-Run the config-vm.sh script.  You may need to grant permssiosn with chmos +x config-vm.sh
+## How To Connect to Data Science VM Jupyter Notebook
+The terraform output will provide an SSH command like the following.
+ex: $ ssh -L 0.0.0.0:8888:localhost:8888 dsadmin@PUBLIC_IP_ADDRESS_FROM_OUTPUT
+
+Run the config-vm.sh script.  You will need to grant permssiosn with chmos +x config-vm.sh
+ex: $ chmod +x config-vm.sh;./config-vm.sh;
+
 Then use a browser to connect to the URL it outputs with a unique token
 
 ![screenshot](aiml01work.png)

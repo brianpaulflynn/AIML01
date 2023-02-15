@@ -1,12 +1,11 @@
 # ref: https://github.com/Azure/terraform/tree/master/quickstart/101-machine-learning
 # Generate random string for unique compute instance name
-resource "random_string" "ci_prefix" {
-  length  = 8
-  upper   = false
-  special = false
-  numeric  = false # **NOTE**: number is deprecated, use `numeric` instead.
-}
-
+# resource "random_string" "ci_prefix" {
+#   length  = 8
+#   upper   = false
+#   special = false
+#   numeric  = false # **NOTE**: number is deprecated, use `numeric` instead.
+# }
 # Compute instance
 resource "azurerm_machine_learning_compute_instance" "compute_instance" {
   name                          = "bpf7701instance" #"${random_string.ci_prefix.result}instance"
