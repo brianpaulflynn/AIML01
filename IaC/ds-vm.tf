@@ -61,6 +61,15 @@ resource "azurerm_public_ip" "ds-pip" {
   }
 }
 
+data "azurerm_public_ip" "ds-pip" {
+  name = "ds-pip"
+  resource_group_name = azurerm_resource_group.ds.name
+}
+output "public_ip_address" {
+  #value = "${data.azurerm_public_ip.ds-pip.*.ip_address}"
+  value = data.azurerm_public_ip.ds-pip.ip_address
+}
+
 resource "azurerm_network_interface" "ds" {
   name                = "ds-ni"
   location            = "${var.location}"
@@ -73,9 +82,6 @@ resource "azurerm_network_interface" "ds" {
     public_ip_address_id = azurerm_public_ip.ds-pip.id
   }
 }
-
-# resource "azurerm_virtual_machine" "ds2004" {
-# }
 
 resource "azurerm_virtual_machine" "ds" {
   name                  = "${var.vm-name}-vm"
@@ -117,8 +123,8 @@ resource "azurerm_virtual_machine" "ds" {
 
   os_profile {
     computer_name  = "hostname"
-    admin_username = "dsadmin"
-    admin_password = "Password1234!"
+    admin_username = "${var.admin_username}" #"dsadmin"
+    admin_password = "${var.admin_password}" #"Password1234!"
   }
 
   os_profile_linux_config {
@@ -128,4 +134,21 @@ resource "azurerm_virtual_machine" "ds" {
 #   tags {
 #     environment = "datascience-vm, ${var.vm-name}"
 #   }
+}
+
+
+resource "null_resource" "copy-test-file" {
+
+  connection {
+    type     = "ssh"
+    host     = "${azurerm_public_ip.ds-pip.ip_address}"
+    user     = "${var.admin_username}"
+    password = "${var.admin_password}"
+  }t
+
+  provisioner "file" {
+    source      = "../scripts/config-vm.sh"
+    destination = "config-vm.sh"
+  }
+
 }

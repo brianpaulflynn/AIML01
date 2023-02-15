@@ -16,6 +16,18 @@ variable "location" {
   default     = "East US"
 }
 
+variable "admin_username" {
+  type        = string
+  description = "admin user for vm"
+  default     = "dsadmin"
+}
+
+variable "admin_password" {
+  type        = string
+  description = "admin pwd for vm"
+  default     = "Password1234!"
+}
+
 variable "ARM_SUBSCRIPTION_ID" {
     type = string
 }
