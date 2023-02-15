@@ -6,3 +6,4 @@ pip3 install jupyter
 pip3 install matplotlib tensorflow-gpu==2.10.0
 pip3 install azure-ai-ml==1.2.0 azure-identity==1.12.0
 jupyter notebook
+
