@@ -43,5 +43,16 @@ ex: $ chmod +x config-vm.sh;./config-vm.sh;
 
 Then use a browser to connect to the URL it outputs with a unique token
 
-![screenshot](aiml01work.png)
+## Build with Terraform
+The infrastructure will spin up and provide instructions for configuring the VM.
+![Build with Terraform](BuildWithTerraform.png)
+## Post Deployment Config
+The SSH command for logging in, and password are provided.  Also a one line of multiple commands to run that will result in a link to your Jupyter Notebook.
+![Post Deployment Config](PostDeploymentConfig.png)
+## Your Notebook Is Ready!
+Open that link in a browser.  The SSH tunnel you opened, provides access to the notebook.
+![Alt text](NotebookIsReady.png)
+## Open Your Notebook
+When you open the  notebook, the terminal console will show activity.  
+![Alt text](ConnectToJupyterNotebook.png)
 
