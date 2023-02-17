@@ -1,8 +1,4 @@
 # ref: https://github.com/Azure/terraform/tree/master/quickstart/101-machine-learning
-resource "azurerm_resource_group" "default" {
-  name     = "rg-${var.name}-${var.environment}"
-  location = var.location
-}
 # Dependent resources for Azure Machine Learning
 resource "azurerm_application_insights" "default" {
   name                = "appi-${var.name}-${var.environment}"

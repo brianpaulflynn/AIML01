@@ -1,7 +1,7 @@
 variable "name" {
   type        = string
   description = "Name of the deployment"
-  default     = "bpf7701"
+  default     = "bpf7707"
 }
 
 variable "environment" {
@@ -13,7 +13,7 @@ variable "environment" {
 variable "location" {
   type        = string
   description = "Location of the resources"
-  default     = "East US"
+  default     = "West US"
 }
 
 variable "admin_username" {
